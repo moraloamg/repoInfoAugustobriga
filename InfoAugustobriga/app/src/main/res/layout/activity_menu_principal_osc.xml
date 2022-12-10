@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    tools:context=".AcMenuPrincipal">
 
     <!--fondo-->
     <View
@@ -40,7 +42,7 @@
 
     <!--Nuestro centro-->
     <LinearLayout
-        android:id="@+id/cont1osc"
+        android:id="@+id/ly_centro_osc"
         android:layout_width="170dp"
         android:layout_height="115dp"
         android:layout_marginStart="28dp"
@@ -73,7 +75,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="9dp"
                 android:layout_marginBottom="12dp"
-                android:text="Nuestro centro"
+                android:text="@string/nuestro_centro"
                 android:textColor="@color/white"
                 android:textSize="13sp" />
         </LinearLayout>
@@ -81,7 +83,7 @@
 
     <!--Novedades-->
     <LinearLayout
-        android:id="@+id/cont2osc"
+        android:id="@+id/ly_novedades_osc"
         android:layout_width="170dp"
         android:layout_height="115dp"
         android:layout_marginTop="164dp"
@@ -113,7 +115,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="9dp"
                 android:layout_marginBottom="12dp"
-                android:text="Noticias"
+                android:text="@string/noticias"
                 android:textColor="@color/white"
                 android:textSize="13sp" />
         </LinearLayout>
@@ -121,7 +123,7 @@
 
     <!--Profesorado-->
     <LinearLayout
-        android:id="@+id/cont4osc"
+        android:id="@+id/ly_profesorado_osc"
         android:layout_width="170dp"
         android:layout_height="115dp"
         android:layout_marginTop="16dp"
@@ -130,7 +132,7 @@
         android:orientation="horizontal"
         android:weightSum="2"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cont2osc"
+        app:layout_constraintTop_toBottomOf="@+id/ly_novedades_osc"
         android:baselineAligned="false">
         <LinearLayout
             android:layout_width="170dp"
@@ -153,7 +155,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="9dp"
                 android:layout_marginBottom="12dp"
-                android:text="Profesorado"
+                android:text="@string/profesorado"
                 android:textColor="@color/white"
                 android:textSize="13sp" />
         </LinearLayout>
@@ -161,7 +163,7 @@
 
     <!--Plano del centro-->
     <LinearLayout
-        android:id="@+id/cont3osc"
+        android:id="@+id/ly_plano_osc"
         android:layout_width="170dp"
         android:layout_height="115dp"
         android:layout_marginStart="28dp"
@@ -170,7 +172,7 @@
         android:orientation="horizontal"
         android:weightSum="2"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cont1osc"
+        app:layout_constraintTop_toBottomOf="@+id/ly_centro_osc"
         android:baselineAligned="false">
         <LinearLayout
             android:layout_width="170dp"
@@ -193,7 +195,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="9dp"
                 android:layout_marginBottom="12dp"
-                android:text="Plano del centro"
+                android:text="@string/plano_del_centro"
                 android:textColor="@color/white"
                 android:textSize="13sp" />
         </LinearLayout>
@@ -201,7 +203,7 @@
 
     <!--Horario-->
     <LinearLayout
-        android:id="@+id/cont5osc"
+        android:id="@+id/ly_horario_osc"
         android:layout_width="170dp"
         android:layout_height="115dp"
         android:layout_marginStart="28dp"
@@ -210,7 +212,7 @@
         android:orientation="horizontal"
         android:weightSum="2"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cont3osc"
+        app:layout_constraintTop_toBottomOf="@+id/ly_plano_osc"
         android:baselineAligned="false">
         <LinearLayout
             android:layout_width="170dp"
@@ -233,7 +235,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="9dp"
                 android:layout_marginBottom="12dp"
-                android:text="Horarios"
+                android:text="@string/horarios"
                 android:textColor="@color/white"
                 android:textSize="13sp" />
         </LinearLayout>
@@ -241,7 +243,7 @@
 
     <!--Calendario-->
     <LinearLayout
-        android:id="@+id/cont6osc"
+        android:id="@+id/ly_calendario_osc"
         android:layout_width="170dp"
         android:layout_height="115dp"
         android:layout_marginTop="16dp"
@@ -250,7 +252,7 @@
         android:orientation="horizontal"
         android:weightSum="2"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cont4osc"
+        app:layout_constraintTop_toBottomOf="@+id/ly_profesorado_osc"
         android:baselineAligned="false">
         <LinearLayout
             android:layout_width="170dp"
@@ -273,7 +275,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="9dp"
                 android:layout_marginBottom="12dp"
-                android:text="Calendario"
+                android:text="@string/calendario"
                 android:textColor="@color/white"
                 android:textSize="13sp" />
         </LinearLayout>
@@ -281,7 +283,7 @@
 
     <!--Youtube-->
     <LinearLayout
-        android:id="@+id/cont7osc"
+        android:id="@+id/ly_youtube_osc"
         android:layout_width="170dp"
         android:layout_height="115dp"
         android:layout_marginStart="28dp"
@@ -290,7 +292,7 @@
         android:orientation="horizontal"
         android:weightSum="2"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cont5osc"
+        app:layout_constraintTop_toBottomOf="@+id/ly_horario_osc"
         android:baselineAligned="false">
         <LinearLayout
             android:layout_width="170dp"
@@ -313,7 +315,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="9dp"
                 android:layout_marginBottom="12dp"
-                android:text="Youtube"
+                android:text="@string/youtube"
                 android:textColor="@color/white"
                 android:textSize="13sp" />
         </LinearLayout>
@@ -321,7 +323,7 @@
 
     <!--Radio-->
     <LinearLayout
-        android:id="@+id/cont8osc"
+        android:id="@+id/ly_radio_osc"
         android:layout_width="170dp"
         android:layout_height="115dp"
         android:layout_marginTop="16dp"
@@ -330,7 +332,7 @@
         android:orientation="horizontal"
         android:weightSum="2"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cont6osc"
+        app:layout_constraintTop_toBottomOf="@+id/ly_calendario_osc"
         android:baselineAligned="false">
         <LinearLayout
             android:layout_width="170dp"
@@ -353,13 +355,15 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="9dp"
                 android:layout_marginBottom="12dp"
-                android:text="Radio El Candil"
+                android:text="@string/radio"
                 android:textColor="@color/white"
                 android:textSize="13sp" />
         </LinearLayout>
     </LinearLayout>
 
+    <!--titulo de cabecera-->
     <LinearLayout
+        android:id="@+id/ly_titulo_osc"
         android:layout_width="323dp"
         android:layout_height="70dp"
         android:layout_marginTop="55dp"
@@ -369,7 +373,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
-            android:id="@+id/img_titulo"
+            android:id="@+id/img_titulo_osc"
             android:layout_width="match_parent"
             android:layout_height="67dp"
             android:src="@drawable/cabecera_temporal" />

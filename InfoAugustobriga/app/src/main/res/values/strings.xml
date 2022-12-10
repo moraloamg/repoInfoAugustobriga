@@ -1,3 +1,14 @@
 <resources>
     <string name="app_name">InfoAugustobriga</string>
+    <string name="nuestro_centro">Nuestro centro</string>
+    <string name="noticias">Noticias</string>
+    <string name="plano_del_centro">Plano del centro</string>
+    <string name="profesorado">Profesorado</string>
+    <string name="horarios">Horarios</string>
+    <string name="calendario">Calendario</string>
+    <string name="radio">Radio El Candil</string>
+    <string name="youtube">Youtube</string>
+    <string name="formacion_profesional">Formación Profesional</string>
+    <string name="bachillerato">Bachillerato</string>
+    <string name="educacion_secundaria">Educación Secundaria</string>
 </resources>
