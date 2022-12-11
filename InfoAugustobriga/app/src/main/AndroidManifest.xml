@@ -12,8 +12,13 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.InfoAugustobriga">
         <activity
+            android:name=".calendarios.AcCalendarios"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <activity
             android:name=".profesorado.AcProfesorado"
-            android:exported="false" />
+            android:exported="false"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".horarios.AcListaCursos"
             android:exported="false"

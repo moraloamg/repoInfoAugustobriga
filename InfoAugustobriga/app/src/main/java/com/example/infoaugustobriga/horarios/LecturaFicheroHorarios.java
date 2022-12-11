@@ -11,24 +11,15 @@ import java.util.ArrayList;
 
 public class LecturaFicheroHorarios extends AsyncTask {
     private String url;
-    private ArrayList<String> contenido;
-    //No hay poliformismo, ya que sólo utilizamos una clase.
-    public AcHorarios delegar = null;
 
     public LecturaFicheroHorarios(String url) {
         this.url = url;
-        contenido = new ArrayList<>();
-    }
-
-    @Override
-    protected void onPostExecute(Object o) {
-        super.onPostExecute(o);
-        delegar.procesoFinalizado(contenido);
     }
 
 
     @Override
-    protected Object doInBackground(Object[] objects) {
+    protected ArrayList<String> doInBackground(Object[] objects) {
+        ArrayList<String> contenido = new ArrayList<>();
         URL urlFichero = null;
 
         try {
@@ -45,12 +36,7 @@ public class LecturaFicheroHorarios extends AsyncTask {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return true;
-    }
-
-
-
-    public ArrayList<String> getContenido() {
         return contenido;
     }
+
 }

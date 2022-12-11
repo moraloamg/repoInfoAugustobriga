@@ -20,15 +20,21 @@ import com.example.infoaugustobriga.Interfaces.IModosClaroOscuro;
 import com.example.infoaugustobriga.R;
 import com.example.infoaugustobriga.adaptadoresListas.AdaptadorListaGenerico;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 
 public class AcListaCursos extends AppCompatActivity implements IConfigurarActividad {
 
-    ArrayList<String> contenidoFichero;
+    ArrayList<String> listaCursos;
     ListView lViewCursos;
-    Animation anim;
-    Context contexto;
     Typeface fuenteContenedores;
+    String urlCarpeta, extension;
+
+    //es necesario volver a enviar los datos de vuelta a la actividad anterior
+    JSONArray listaJsonModalidades;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,26 +46,32 @@ public class AcListaCursos extends AppCompatActivity implements IConfigurarActiv
         cambiarDiaNoche(configuracion);
         //identificamos lo elementos de la interfaz
         identificarElementosInterfaz(configuracion);
-        contenidoFichero = recibirDatos();
-        contenidoFichero.remove(0); //TODO arreglar fichero mas adelante
-        lViewCursos.setAdapter(new AdaptadorListaGenerico(this,contenidoFichero,null,configuracion));
+        recibirDatos();
+        lViewCursos.setAdapter(new AdaptadorListaGenerico(this,listaCursos,null,configuracion));
         activarBotones();
         //TODO poner mensaje de error por si peta
 
 
     }
 
-    private ArrayList<String> recibirDatos(){
-        ArrayList<String> resultado;
+    private void recibirDatos(){
         Bundle extras = getIntent().getExtras();
-        resultado = extras.getStringArrayList("datos");
-        return resultado;
+        listaCursos = extras.getStringArrayList("listaCursos");
+        urlCarpeta = extras.getString("url_carpeta");
+        extension = extras.getString("extension");
+
+        try {
+            listaJsonModalidades = new JSONArray(extras.getString("listaJsonModalidades"));
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
     public void onBackPressed() {
         Intent i=new Intent(getApplicationContext(), AcHorarios.class);
         i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        i.putExtra("listaModalidades",listaJsonModalidades.toString());
         startActivity(i);
     }
 
@@ -90,7 +102,7 @@ public class AcListaCursos extends AppCompatActivity implements IConfigurarActiv
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 String horario = lViewCursos.getItemAtPosition(i).toString();
                 Intent irFoto=new Intent(Intent.ACTION_VIEW,
-                        Uri.parse("https://raw.githubusercontent.com/moraloamg/pruebaAugustobriga/main/horarios/"+horario+".png"));
+                        Uri.parse(urlCarpeta+horario+extension));
                 startActivity(irFoto);
             }
         });

@@ -12,22 +12,14 @@ import java.net.URL;
 public class LecturaJson extends AsyncTask {
 
     private String url;
-    AcMenuPrincipal menuPrincipal;
-    String ficheroJson;
 
     public LecturaJson(String url){
         this.url = url;
     }
 
-
     @Override
-    protected void onPostExecute(Object o) {
-        super.onPostExecute(o);
-        menuPrincipal.lecturaFinalizada(ficheroJson);
-    }
-
-    @Override
-    protected Object doInBackground(Object[] objects) {
+    protected String doInBackground(Object[] objects) {
+        String ficheroJson="";
         URL urlFichero = null;
         try {
 
@@ -45,6 +37,6 @@ public class LecturaJson extends AsyncTask {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return true;
+        return ficheroJson;
     }
 }

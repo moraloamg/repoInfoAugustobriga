@@ -1,4 +1,4 @@
-package com.example.infoaugustobriga.horarios;
+package com.example.infoaugustobriga.calendarios;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -7,7 +7,6 @@ import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -23,20 +22,18 @@ import com.example.infoaugustobriga.adaptadoresListas.AdaptadorListaGenerico;
 import org.json.JSONArray;
 import org.json.JSONException;
 
-import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.concurrent.ExecutionException;
 
-public class AcHorarios extends AppCompatActivity implements IConfigurarActividad {
+public class AcCalendarios extends AppCompatActivity implements IConfigurarActividad {
 
     //LinearLayout del titulo
-    LinearLayout lyTituloHorarios;
+    LinearLayout lyTituloCalendarios;
     //Animaciones
     Animation animTitulo;
     //lista de modalidades
-    JSONArray listaJsonModalidades;
+    JSONArray listaApartados;
     //listview para rellenar
-    ListView lViewModalidades;
+    ListView lViewApartados;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,24 +50,24 @@ public class AcHorarios extends AppCompatActivity implements IConfigurarActivida
         identificarElementosInterfaz(configuracion);;
         cargarAnimaciones();
         //obtenemos la lista de modalidades del array Json que hemos pasado a esta actividad
-        ArrayList<String> listaModalidades = obtenerValorModalidades();
-        lViewModalidades.setAdapter(new AdaptadorListaGenerico(this,listaModalidades,null,configuracion));
+        ArrayList<String> listaApartados = obtenerValorApartados();
+        lViewApartados.setAdapter(new AdaptadorListaGenerico(this,listaApartados,null,configuracion));
         activarBotones();
 
         //TODO COMPROBAR QUE HAY CONEXION A INTERNET AL FINAL DE LA CARGA Y MOSTRAR UN MENSAJE DE ERROR
 
     }
 
-    private ArrayList<String> obtenerValorModalidades() {
+    private ArrayList<String> obtenerValorApartados() {
         ArrayList<String> resultado = new ArrayList<>();
-        for (int i = 0; i < listaJsonModalidades.length(); i++) {
-            String modalidad = null;
+        for (int i = 0; i < listaApartados.length(); i++) {
+            String apartado = null;
             try {
-                modalidad = listaJsonModalidades.getJSONObject(i).getString("modalidad");
+                apartado = listaApartados.getJSONObject(i).getString("apartado");
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-            resultado.add(modalidad);
+            resultado.add(apartado);
         }
         return resultado;
     }
@@ -78,26 +75,10 @@ public class AcHorarios extends AppCompatActivity implements IConfigurarActivida
     private void recibirDatos(){
         Bundle extras = getIntent().getExtras();
         try {
-            listaJsonModalidades = new JSONArray(extras.getString("listaModalidades"));
+            listaApartados = new JSONArray(extras.getString("listaApartados"));
         } catch (JSONException e) {
             e.printStackTrace();
         }
-    }
-
-    private ArrayList<String> obtenerDatosFichero(String url){
-        ArrayList<String> resultado = new ArrayList<>();
-
-        LecturaFicheroHorarios lector=new LecturaFicheroHorarios(url);
-        //una vez se ejecute el siguiente método, el hilo de la clase actual acabará y empezará el hilo de lectura
-        //el hilo principal de la aplicacion se congelara hasta que se lea el fichero (es imperceptible)
-        try {
-             resultado = (ArrayList<String>) lector.execute().get();
-        } catch (ExecutionException e) {
-            e.printStackTrace();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        return resultado;
     }
 
     @Override
@@ -105,41 +86,32 @@ public class AcHorarios extends AppCompatActivity implements IConfigurarActivida
         super.onConfigurationChanged(newConfig);
 
         if (newConfig.uiMode == MODO_CLARO) {
-            setContentView(R.layout.activity_horarios_claro);
+            setContentView(R.layout.activity_calendarios_claro);
         } else if (newConfig.uiMode == MODO_OSCURO){
-            setContentView(R.layout.activity_horarios_osc);
+            setContentView(R.layout.activity_calendarios_osc);
         }
     }
 
     @Override
     public void identificarElementosInterfaz(Configuration newConfig) {
-        lyTituloHorarios = findViewById(R.id.ly_titulo_horarios_claro);
+        lyTituloCalendarios = findViewById(R.id.ly_titulo_calendario_claro);
         if(newConfig.uiMode == MODO_CLARO){
-            lViewModalidades = findViewById(R.id.listViewClaro);
+            lViewApartados = findViewById(R.id.listViewClaro);
         }else if (newConfig.uiMode == MODO_OSCURO){
-            lViewModalidades = findViewById(R.id.listViewOsc);
+            lViewApartados = findViewById(R.id.listViewOsc);
         }
     }
 
     @Override
     public void activarBotones() {
-        lViewModalidades.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        lViewApartados.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 try {
-                    String urlLista=listaJsonModalidades.getJSONObject(i).getString("enlace_lista");
-                    String urlCarpeta=listaJsonModalidades.getJSONObject(i).getString("enlace_carpeta");
-                    String extension=listaJsonModalidades.getJSONObject(i).getString("extension_imagenes");
+                    String enlaceFichero= listaApartados.getJSONObject(i).getString("enlace");
 
-                    ArrayList<String> listaCursos = obtenerDatosFichero(urlLista);
-
-                    Intent irListaCursos=new Intent(AcHorarios.this, AcListaCursos.class);
-                    irListaCursos.putExtra("listaCursos",listaCursos);
-                    irListaCursos.putExtra("url_carpeta",urlCarpeta);
-                    irListaCursos.putExtra("extension",extension);
-
-                    irListaCursos.putExtra("listaJsonModalidades",listaJsonModalidades.toString());
-                    startActivity(irListaCursos);
+                    Intent irApartado=new Intent(Intent.ACTION_VIEW, Uri.parse(enlaceFichero));
+                    startActivity(irApartado);
 
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -150,7 +122,7 @@ public class AcHorarios extends AppCompatActivity implements IConfigurarActivida
 
     public void cargarAnimaciones() {
         animTitulo = AnimationUtils.loadAnimation(this,R.anim.anim_cabecera);
-        lyTituloHorarios.startAnimation(animTitulo);
+        lyTituloCalendarios.startAnimation(animTitulo);
     }
 
     @Override

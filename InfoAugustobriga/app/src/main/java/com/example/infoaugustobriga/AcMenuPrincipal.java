@@ -14,13 +14,16 @@ import android.view.animation.AnimationUtils;
 import android.widget.LinearLayout;
 
 import com.example.infoaugustobriga.Interfaces.IConfigurarActividad;
+import com.example.infoaugustobriga.calendarios.AcCalendarios;
 import com.example.infoaugustobriga.horarios.AcHorarios;
+import com.example.infoaugustobriga.profesorado.AcProfesorado;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.json.JSONArray;
 
 import java.util.ArrayList;
+import java.util.concurrent.ExecutionException;
 
 public class AcMenuPrincipal extends AppCompatActivity implements IConfigurarActividad {
 
@@ -56,14 +59,13 @@ public class AcMenuPrincipal extends AppCompatActivity implements IConfigurarAct
     public void leerFicheroRaiz(String url){
         //TODO conectar primero para saber si hay conexion a internet o si el fichero existe
         LecturaJson fr= new LecturaJson(url);
-        fr.menuPrincipal = this;
-        fr.execute();
-    }
-
-    public void lecturaFinalizada(String ficheroJson){
         try {
-            json = new JSONObject(ficheroJson);
-            //TODO Anadir aqui mensaje de error por si el fichero esta corrupto
+            //convertimos el string a json
+            json = new JSONObject((String) fr.execute().get());
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -156,7 +158,14 @@ public class AcMenuPrincipal extends AppCompatActivity implements IConfigurarAct
         lyProfesorado.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                Intent irProfesorado = null;
+                irProfesorado = new Intent(AcMenuPrincipal.this, AcProfesorado.class);
+                try {
+                    irProfesorado.putExtra("listaApartados", json.getJSONArray("Profesorado").toString());
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                startActivity(irProfesorado);
             }
         });
         lyHorarios.setOnClickListener(new View.OnClickListener() {
@@ -175,7 +184,14 @@ public class AcMenuPrincipal extends AppCompatActivity implements IConfigurarAct
         lyCalendario.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                Intent irCalendarios = null;
+                irCalendarios = new Intent(AcMenuPrincipal.this, AcCalendarios.class);
+                try {
+                    irCalendarios.putExtra("listaApartados", json.getJSONArray("Calendarios").toString());
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                startActivity(irCalendarios);
             }
         });
         lyYoutube.setOnClickListener(new View.OnClickListener() {
