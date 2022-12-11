@@ -11,4 +11,5 @@
     <color name="verde_dia">#92CD8D</color>
     <color name="azul_noche">#115060</color>
     <color name="negro_letra">#172646</color>
+    <color name="fondo_claro">#E8E9EA</color>
 </resources>

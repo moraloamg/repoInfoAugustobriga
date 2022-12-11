@@ -363,7 +363,7 @@
 
     <!--titulo de cabecera-->
     <LinearLayout
-        android:id="@+id/ly_titulo_osc"
+        android:id="@+id/ly_titulo_claro"
         android:layout_width="323dp"
         android:layout_height="70dp"
         android:layout_marginTop="55dp"
@@ -373,7 +373,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
-            android:id="@+id/img_titulo_osc"
+            android:id="@+id/img_titulo_claro"
             android:layout_width="match_parent"
             android:layout_height="67dp"
             android:src="@drawable/cabecera_temporal" />

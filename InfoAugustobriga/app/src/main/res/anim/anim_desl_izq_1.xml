@@ -5,8 +5,8 @@
     android:interpolator="@android:anim/accelerate_interpolator">
 
     <translate
-        android:fromYDelta="40"
-        android:toYDelta="0"
+        android:fromXDelta="-200"
+        android:toXDelta="0"
         />
 
     <alpha

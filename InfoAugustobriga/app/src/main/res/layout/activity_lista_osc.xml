@@ -4,14 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".horarios.AcHorarios">
+    tools:context=".horarios.AcListaCursos">
 
     <!--fondo-->
     <View
-        android:id="@+id/fondo_claro"
+        android:id="@+id/fondo_oscuro"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/fondo_claro"
+        android:background="@drawable/fondo_oscuro"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -20,10 +20,10 @@
 
     <!--cabecera-->
     <View
-        android:id="@+id/cabecera_claro"
+        android:id="@+id/cabecera_osc"
         android:layout_width="match_parent"
         android:layout_height="310dp"
-        android:background="@drawable/cabecera_claro"
+        android:background="@drawable/cabecera_osc"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -31,44 +31,24 @@
 
     <!--pie de pagina-->
     <View
-        android:id="@+id/pie_pagina_claro"
+        android:id="@+id/pie_pagina_osc"
         android:layout_width="match_parent"
         android:layout_height="260dp"
-        android:background="@drawable/pie_pagina_claro"
+        android:background="@drawable/pie_pagina_osc"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"/>
 
-
-    <!--lista de modalidades-->
+    <!--lista cursos-->
     <ListView
-        android:id="@+id/listViewClaro"
+        android:id="@+id/listViewOsc"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:divider="@null"
-        android:dividerHeight="45.0sp"
-        android:layout_marginTop="160dp"
+        android:dividerHeight="25.0sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
-    <!--titulo de cabecera-->
-    <LinearLayout
-        android:id="@+id/ly_titulo_horarios_claro"
-        android:layout_width="327dp"
-        android:layout_height="59dp"
-        android:layout_marginTop="55dp"
-        android:orientation="vertical"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <ImageView
-            android:id="@+id/img_titulo_osc"
-            android:layout_width="match_parent"
-            android:layout_height="57dp"
-            android:src="@drawable/titulo_horarios" />
-    </LinearLayout>
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>
