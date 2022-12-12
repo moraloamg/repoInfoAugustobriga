@@ -307,7 +307,7 @@
                 android:layout_width="68dp"
                 android:layout_height="69dp"
                 android:layout_marginTop="5dp"
-                android:src="@drawable/icon_red_osc" />
+                android:src="@drawable/icon_youtube_osc" />
 
             <TextView
                 android:id="@+id/txtYoutube"
@@ -347,7 +347,7 @@
                 android:layout_width="68dp"
                 android:layout_height="69dp"
                 android:layout_marginTop="5dp"
-                android:src="@drawable/icon_red_osc"/>
+                android:src="@drawable/icon_radio_osc"/>
 
             <TextView
                 android:id="@+id/txtRadio"
