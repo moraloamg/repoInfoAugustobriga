@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.example.infoaugustobriga.Interfaces.IConfigurarActividad;
 import com.example.infoaugustobriga.calendarios.AcCalendarios;
@@ -29,8 +30,10 @@ public class AcMenuPrincipal extends AppCompatActivity implements IConfigurarAct
 
     //LinearLayout de los contenedores de iconos
     LinearLayout lyCalendario, lyHorarios, lyMapa, lyNovedades, lyCentro, lyProfesorado, lyYoutube, lyRadio;
-    //LinearLayout del titulo de la cabecera
+    //LinearLayout del titulo de la cabecera para animaciones
     LinearLayout lyTitulo;
+    //TextView con el titulo
+    TextView txtTitulo;
     //Animaciones
     Animation animCabecera, animSubcabecera, animContenedores;
     //fichero .json con todos los enlaces
@@ -85,6 +88,8 @@ public class AcMenuPrincipal extends AppCompatActivity implements IConfigurarAct
     @Override
     public void identificarElementosInterfaz(Configuration newConfig){
         lyTitulo = findViewById(R.id.ly_titulo_claro);
+        txtTitulo = findViewById(R.id.txt_titulo_claro);
+        txtTitulo.setText(R.string.tituloAplicacion);
         if (newConfig.uiMode == MODO_CLARO) {
             lyCalendario = findViewById(R.id.ly_calendario_claro);
             lyHorarios = findViewById(R.id.ly_horario_claro);

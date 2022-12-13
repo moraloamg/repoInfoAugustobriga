@@ -2,7 +2,6 @@ package com.example.infoaugustobriga.horarios;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.content.res.Resources;
@@ -10,19 +9,15 @@ import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.example.infoaugustobriga.Interfaces.IConfigurarActividad;
-import com.example.infoaugustobriga.Interfaces.IModosClaroOscuro;
 import com.example.infoaugustobriga.R;
 import com.example.infoaugustobriga.adaptadoresListas.AdaptadorListaGenerico;
 
 import org.json.JSONArray;
 import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.util.ArrayList;
 
@@ -80,9 +75,9 @@ public class AcListaCursos extends AppCompatActivity implements IConfigurarActiv
         super.onConfigurationChanged(newConfig);
 
         if (newConfig.uiMode == MODO_CLARO) {
-            setContentView(R.layout.activity_lista_claro);
+            setContentView(R.layout.activity_lista_generica_claro);
         } else if (newConfig.uiMode == MODO_OSCURO){
-            setContentView(R.layout.activity_lista_osc);
+            setContentView(R.layout.activity_lista_generica_osc);
         }
     }
 

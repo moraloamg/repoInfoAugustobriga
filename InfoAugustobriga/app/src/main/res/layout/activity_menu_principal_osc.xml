@@ -372,11 +372,14 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <ImageView
-            android:id="@+id/img_titulo_claro"
+        <TextView
+            android:id="@+id/txt_titulo_claro"
             android:layout_width="match_parent"
-            android:layout_height="67dp"
-            android:src="@drawable/cabecera_temporal" />
+            android:layout_height="match_parent"
+            android:textAlignment="center"
+            android:textSize="38dp"
+            android:fontFamily="@font/sriracha"
+            android:textColor="@color/white"/>
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

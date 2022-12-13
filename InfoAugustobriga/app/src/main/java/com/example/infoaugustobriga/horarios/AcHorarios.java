@@ -5,15 +5,15 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.content.res.Resources;
-import android.net.Uri;
+import android.graphics.Typeface;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.example.infoaugustobriga.AcMenuPrincipal;
 import com.example.infoaugustobriga.Interfaces.IConfigurarActividad;
@@ -23,20 +23,23 @@ import com.example.infoaugustobriga.adaptadoresListas.AdaptadorListaGenerico;
 import org.json.JSONArray;
 import org.json.JSONException;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
 
 public class AcHorarios extends AppCompatActivity implements IConfigurarActividad {
 
-    //LinearLayout del titulo
+    //LinearLayout del titulo para la animacion
     LinearLayout lyTituloHorarios;
+    //TextView para el titulo
+    TextView txtTitulo;
     //Animaciones
     Animation animTitulo;
     //lista de modalidades
     JSONArray listaJsonModalidades;
     //listview para rellenar
     ListView lViewModalidades;
+    //fuente
+    Typeface fuenteCabecera;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -105,15 +108,17 @@ public class AcHorarios extends AppCompatActivity implements IConfigurarActivida
         super.onConfigurationChanged(newConfig);
 
         if (newConfig.uiMode == MODO_CLARO) {
-            setContentView(R.layout.activity_horarios_claro);
+            setContentView(R.layout.activity_general_claro);
         } else if (newConfig.uiMode == MODO_OSCURO){
-            setContentView(R.layout.activity_horarios_osc);
+            setContentView(R.layout.activity_general_osc);
         }
     }
 
     @Override
     public void identificarElementosInterfaz(Configuration newConfig) {
-        lyTituloHorarios = findViewById(R.id.ly_titulo_horarios_claro);
+        lyTituloHorarios = findViewById(R.id.ly_titulo_claro);
+        txtTitulo = findViewById(R.id.txt_titulo_claro);
+        txtTitulo.setText(R.string.horarios);
         if(newConfig.uiMode == MODO_CLARO){
             lViewModalidades = findViewById(R.id.listViewClaro);
         }else if (newConfig.uiMode == MODO_OSCURO){

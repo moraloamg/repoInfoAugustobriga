@@ -5,14 +5,17 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.content.res.Resources;
+import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.example.infoaugustobriga.AcMenuPrincipal;
 import com.example.infoaugustobriga.Interfaces.IConfigurarActividad;
@@ -26,14 +29,18 @@ import java.util.ArrayList;
 
 public class AcCalendarios extends AppCompatActivity implements IConfigurarActividad {
 
-    //LinearLayout del titulo
+    //LinearLayout del titulo para las animaciones
     LinearLayout lyTituloCalendarios;
+    //TextView del titulo
+    TextView txtTitulo;
     //Animaciones
     Animation animTitulo;
     //lista de modalidades
     JSONArray listaApartados;
     //listview para rellenar
     ListView lViewApartados;
+    //fuente
+    Typeface fuenteCabecera;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,15 +93,17 @@ public class AcCalendarios extends AppCompatActivity implements IConfigurarActiv
         super.onConfigurationChanged(newConfig);
 
         if (newConfig.uiMode == MODO_CLARO) {
-            setContentView(R.layout.activity_calendarios_claro);
+            setContentView(R.layout.activity_general_claro);
         } else if (newConfig.uiMode == MODO_OSCURO){
-            setContentView(R.layout.activity_calendarios_osc);
+            setContentView(R.layout.activity_general_osc);
         }
     }
 
     @Override
     public void identificarElementosInterfaz(Configuration newConfig) {
-        lyTituloCalendarios = findViewById(R.id.ly_titulo_calendario_claro);
+        lyTituloCalendarios = findViewById(R.id.ly_titulo_claro);
+        txtTitulo = findViewById(R.id.txt_titulo_claro);
+        txtTitulo.setText(R.string.calendario);
         if(newConfig.uiMode == MODO_CLARO){
             lViewApartados = findViewById(R.id.listViewClaro);
         }else if (newConfig.uiMode == MODO_OSCURO){
