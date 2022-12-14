@@ -2,7 +2,8 @@
     <!-- Base application theme. (Night mode)-->
     <style name="Theme.InfoAugustobriga" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/azul_noche</item>
+        <!-- Color de tipografía -->
+        <item name="colorPrimary">@color/white</item>
         <item name="colorPrimaryVariant">@color/azul_noche</item>
         <item name="colorOnPrimary">@color/azul_noche</item>
         <!-- Secondary brand color. -->

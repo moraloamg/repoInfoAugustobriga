@@ -14,7 +14,8 @@ import android.widget.ListView;
 
 import com.example.infoaugustobriga.Interfaces.IConfigurarActividad;
 import com.example.infoaugustobriga.R;
-import com.example.infoaugustobriga.adaptadoresListas.AdaptadorListaGenerico;
+import com.example.infoaugustobriga.miscelanea.AdaptadorListaGenerico;
+import com.example.infoaugustobriga.miscelanea.Mensaje;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -30,10 +31,14 @@ public class AcListaCursos extends AppCompatActivity implements IConfigurarActiv
 
     //es necesario volver a enviar los datos de vuelta a la actividad anterior
     JSONArray listaJsonModalidades;
+    //Mensaje para casos de error
+    Mensaje m;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        m = new Mensaje("Error","Ha ocurrido un error al acceder a esta opción",this);
 
         //obtenemos la configuracion del dispositivo para el modo dia-noche
         Configuration configuracion = Resources.getSystem().getConfiguration();
@@ -42,11 +47,12 @@ public class AcListaCursos extends AppCompatActivity implements IConfigurarActiv
         //identificamos lo elementos de la interfaz
         identificarElementosInterfaz(configuracion);
         recibirDatos();
-        lViewCursos.setAdapter(new AdaptadorListaGenerico(this,listaCursos,null,configuracion));
-        activarBotones();
-        //TODO poner mensaje de error por si peta
-
-
+        if(listaJsonModalidades==null){
+            m.mostrarMensaje();
+        }else {
+            lViewCursos.setAdapter(new AdaptadorListaGenerico(this, listaCursos, null, configuracion));
+            activarBotones();
+        }
     }
 
     private void recibirDatos(){
@@ -59,6 +65,7 @@ public class AcListaCursos extends AppCompatActivity implements IConfigurarActiv
             listaJsonModalidades = new JSONArray(extras.getString("listaJsonModalidades"));
         } catch (JSONException e) {
             e.printStackTrace();
+            m.mostrarMensaje();
         }
     }
 

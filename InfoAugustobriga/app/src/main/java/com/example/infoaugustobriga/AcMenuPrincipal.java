@@ -7,7 +7,6 @@ import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -17,13 +16,13 @@ import android.widget.TextView;
 import com.example.infoaugustobriga.Interfaces.IConfigurarActividad;
 import com.example.infoaugustobriga.calendarios.AcCalendarios;
 import com.example.infoaugustobriga.horarios.AcHorarios;
+import com.example.infoaugustobriga.miscelanea.LecturaJson;
+import com.example.infoaugustobriga.miscelanea.Mensaje;
 import com.example.infoaugustobriga.profesorado.AcProfesorado;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.json.JSONArray;
 
-import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
 
 public class AcMenuPrincipal extends AppCompatActivity implements IConfigurarActividad {
@@ -37,7 +36,9 @@ public class AcMenuPrincipal extends AppCompatActivity implements IConfigurarAct
     //Animaciones
     Animation animCabecera, animSubcabecera, animContenedores;
     //fichero .json con todos los enlaces
-    JSONObject json;
+    JSONObject json = null;
+    //Mensaje para casos de error
+    Mensaje m = new Mensaje();
 
 
     @Override
@@ -50,17 +51,24 @@ public class AcMenuPrincipal extends AppCompatActivity implements IConfigurarAct
         Configuration configuracion = Resources.getSystem().getConfiguration();
         //cargamos el layout que corresponde segun el modo de iluminacion del movil
         cambiarDiaNoche(configuracion);
-        //leemos el fichero raiz del cual obtendremos todos los enlaces
-        leerFicheroRaiz("https://raw.githubusercontent.com/moraloamg/pruebaAugustobriga/main/fichero_raiz.json");
         //identificamos lo elementos de la interfaz
         identificarElementosInterfaz(configuracion);
         cargarAnimaciones();
-        activarBotones();
 
+        //leemos el fichero raiz del cual obtendremos todos los enlaces
+        leerFicheroRaiz("https://raw.githubusercontent.com/moraloamg/pruebaAugustobriga/main/fichero_raiz.json");
+
+        if(json==null){
+            m.setTitulo("Error");
+            m.setContenido("Ha ocurrido un error al iniciar la aplicación");
+            m.setContexto(this);
+            m.mostrarMensaje();
+        }else{
+            activarBotones();
+        }
     }
 
     public void leerFicheroRaiz(String url){
-        //TODO conectar primero para saber si hay conexion a internet o si el fichero existe
         LecturaJson fr= new LecturaJson(url);
         try {
             //convertimos el string a json
@@ -129,11 +137,20 @@ public class AcMenuPrincipal extends AppCompatActivity implements IConfigurarAct
 
     @Override
     public void activarBotones(){
-        //TODO anadir mensaje de error en cada uno de los listeners
+        m.setTitulo("Error");
+        m.setContenido("Ha ocurrido un error al iniciar esta opción");
+        m.setContexto(this);
         lyCentro.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                Intent irNuestroCentro= null;
+                try {
+                    irNuestroCentro = new Intent(Intent.ACTION_VIEW, Uri.parse(json.getString("Nuestro Centro")));
+                    startActivity(irNuestroCentro);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    m.mostrarMensaje();
+                }
             }
         });
         lyNovedades.setOnClickListener(new View.OnClickListener() {
@@ -142,10 +159,12 @@ public class AcMenuPrincipal extends AppCompatActivity implements IConfigurarAct
                 Intent irNovedades= null;
                 try {
                     irNovedades = new Intent(Intent.ACTION_VIEW, Uri.parse(json.getString("Novedades")));
+                    startActivity(irNovedades);
                 } catch (JSONException e) {
                     e.printStackTrace();
+                    m.mostrarMensaje();
                 }
-                startActivity(irNovedades);
+
             }
         });
         lyMapa.setOnClickListener(new View.OnClickListener() {
@@ -154,10 +173,12 @@ public class AcMenuPrincipal extends AppCompatActivity implements IConfigurarAct
                 Intent irPlano= null;
                 try {
                     irPlano = new Intent(Intent.ACTION_VIEW, Uri.parse(json.getString("Plano del centro")));
+                    startActivity(irPlano);
                 } catch (JSONException e) {
                     e.printStackTrace();
+                    m.mostrarMensaje();
                 }
-                startActivity(irPlano);
+
             }
         });
         lyProfesorado.setOnClickListener(new View.OnClickListener() {
@@ -167,10 +188,11 @@ public class AcMenuPrincipal extends AppCompatActivity implements IConfigurarAct
                 irProfesorado = new Intent(AcMenuPrincipal.this, AcProfesorado.class);
                 try {
                     irProfesorado.putExtra("listaApartados", json.getJSONArray("Profesorado").toString());
+                    startActivity(irProfesorado);
                 } catch (JSONException e) {
                     e.printStackTrace();
+                    m.mostrarMensaje();
                 }
-                startActivity(irProfesorado);
             }
         });
         lyHorarios.setOnClickListener(new View.OnClickListener() {
@@ -180,10 +202,12 @@ public class AcMenuPrincipal extends AppCompatActivity implements IConfigurarAct
                 try {
                     //pasamos el array como string y lo volvemos a convertir en la actividad de destino
                     irHorarios.putExtra("listaModalidades",json.getJSONArray("Horarios").toString());
+                    startActivity(irHorarios);
                 } catch (JSONException e) {
                     e.printStackTrace();
+                    m.mostrarMensaje();
                 }
-                startActivity(irHorarios);
+
             }
         });
         lyCalendario.setOnClickListener(new View.OnClickListener() {
@@ -193,10 +217,11 @@ public class AcMenuPrincipal extends AppCompatActivity implements IConfigurarAct
                 irCalendarios = new Intent(AcMenuPrincipal.this, AcCalendarios.class);
                 try {
                     irCalendarios.putExtra("listaApartados", json.getJSONArray("Calendarios").toString());
+                    startActivity(irCalendarios);
                 } catch (JSONException e) {
                     e.printStackTrace();
+                    m.mostrarMensaje();
                 }
-                startActivity(irCalendarios);
             }
         });
         lyYoutube.setOnClickListener(new View.OnClickListener() {
@@ -205,10 +230,12 @@ public class AcMenuPrincipal extends AppCompatActivity implements IConfigurarAct
                 Intent irYoutube= null;
                 try {
                     irYoutube = new Intent(Intent.ACTION_VIEW, Uri.parse(json.getString("Youtube")));
+                    startActivity(irYoutube);
                 } catch (JSONException e) {
                     e.printStackTrace();
+                    m.mostrarMensaje();
                 }
-                startActivity(irYoutube);
+
             }
         });
         lyRadio.setOnClickListener(new View.OnClickListener() {
@@ -217,10 +244,11 @@ public class AcMenuPrincipal extends AppCompatActivity implements IConfigurarAct
                 Intent irRadio= null;
                 try {
                     irRadio = new Intent(Intent.ACTION_VIEW, Uri.parse(json.getString("Radio")));
+                    startActivity(irRadio);
                 } catch (JSONException e) {
                     e.printStackTrace();
+                    m.mostrarMensaje();
                 }
-                startActivity(irRadio);
             }
         });
     }

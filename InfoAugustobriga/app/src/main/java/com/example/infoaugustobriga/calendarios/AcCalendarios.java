@@ -12,7 +12,6 @@ import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -20,7 +19,9 @@ import android.widget.TextView;
 import com.example.infoaugustobriga.AcMenuPrincipal;
 import com.example.infoaugustobriga.Interfaces.IConfigurarActividad;
 import com.example.infoaugustobriga.R;
-import com.example.infoaugustobriga.adaptadoresListas.AdaptadorListaGenerico;
+import com.example.infoaugustobriga.miscelanea.AdaptadorListaGenerico;
+import com.example.infoaugustobriga.miscelanea.Mensaje;
+import com.example.infoaugustobriga.profesorado.AcProfesorado;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -41,10 +42,14 @@ public class AcCalendarios extends AppCompatActivity implements IConfigurarActiv
     ListView lViewApartados;
     //fuente
     Typeface fuenteCabecera;
+    //Mensaje para casos de error
+    Mensaje m;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        m = new Mensaje("Error","Ha ocurrido un error al acceder a esta opción",this);
 
         //TODO OBTENER TAMBIEN LA CONFIGURACION DEL IDIOMA DEL MOVIL
 
@@ -58,10 +63,13 @@ public class AcCalendarios extends AppCompatActivity implements IConfigurarActiv
         cargarAnimaciones();
         //obtenemos la lista de modalidades del array Json que hemos pasado a esta actividad
         ArrayList<String> listaApartados = obtenerValorApartados();
-        lViewApartados.setAdapter(new AdaptadorListaGenerico(this,listaApartados,null,configuracion));
-        activarBotones();
+        if(listaApartados.size() == 0){
+            m.mostrarMensaje();
+        }else{
+            lViewApartados.setAdapter(new AdaptadorListaGenerico(this,listaApartados,null,configuracion));
+            activarBotones();
+        }
 
-        //TODO COMPROBAR QUE HAY CONEXION A INTERNET AL FINAL DE LA CARGA Y MOSTRAR UN MENSAJE DE ERROR
 
     }
 
@@ -71,10 +79,11 @@ public class AcCalendarios extends AppCompatActivity implements IConfigurarActiv
             String apartado = null;
             try {
                 apartado = listaApartados.getJSONObject(i).getString("apartado");
+                resultado.add(apartado);
             } catch (JSONException e) {
                 e.printStackTrace();
+                break;
             }
-            resultado.add(apartado);
         }
         return resultado;
     }
@@ -124,6 +133,7 @@ public class AcCalendarios extends AppCompatActivity implements IConfigurarActiv
 
                 } catch (JSONException e) {
                     e.printStackTrace();
+                    m.mostrarMensaje();
                 }
             }
         });

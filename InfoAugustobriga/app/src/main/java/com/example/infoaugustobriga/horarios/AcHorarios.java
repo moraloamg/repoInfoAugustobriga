@@ -18,7 +18,8 @@ import android.widget.TextView;
 import com.example.infoaugustobriga.AcMenuPrincipal;
 import com.example.infoaugustobriga.Interfaces.IConfigurarActividad;
 import com.example.infoaugustobriga.R;
-import com.example.infoaugustobriga.adaptadoresListas.AdaptadorListaGenerico;
+import com.example.infoaugustobriga.miscelanea.AdaptadorListaGenerico;
+import com.example.infoaugustobriga.miscelanea.Mensaje;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -40,10 +41,14 @@ public class AcHorarios extends AppCompatActivity implements IConfigurarActivida
     ListView lViewModalidades;
     //fuente
     Typeface fuenteCabecera;
+    //Mensaje para casos de error
+    Mensaje m;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        m = new Mensaje("Error","Ha ocurrido un error al acceder a esta opción",this);
 
         //TODO OBTENER TAMBIEN LA CONFIGURACION DEL IDIOMA DEL MOVIL
 
@@ -57,10 +62,12 @@ public class AcHorarios extends AppCompatActivity implements IConfigurarActivida
         cargarAnimaciones();
         //obtenemos la lista de modalidades del array Json que hemos pasado a esta actividad
         ArrayList<String> listaModalidades = obtenerValorModalidades();
-        lViewModalidades.setAdapter(new AdaptadorListaGenerico(this,listaModalidades,null,configuracion));
-        activarBotones();
-
-        //TODO COMPROBAR QUE HAY CONEXION A INTERNET AL FINAL DE LA CARGA Y MOSTRAR UN MENSAJE DE ERROR
+        if(listaModalidades.size() == 0){
+            m.mostrarMensaje();
+        }else {
+            lViewModalidades.setAdapter(new AdaptadorListaGenerico(this, listaModalidades, null, configuracion));
+            activarBotones();
+        }
 
     }
 
@@ -70,10 +77,11 @@ public class AcHorarios extends AppCompatActivity implements IConfigurarActivida
             String modalidad = null;
             try {
                 modalidad = listaJsonModalidades.getJSONObject(i).getString("modalidad");
+                resultado.add(modalidad);
             } catch (JSONException e) {
                 e.printStackTrace();
+                break;
             }
-            resultado.add(modalidad);
         }
         return resultado;
     }
@@ -137,17 +145,20 @@ public class AcHorarios extends AppCompatActivity implements IConfigurarActivida
                     String extension=listaJsonModalidades.getJSONObject(i).getString("extension_imagenes");
 
                     ArrayList<String> listaCursos = obtenerDatosFichero(urlLista);
+                    if(listaCursos==null){
+                        m.mostrarMensaje();
+                    }else{
+                        Intent irListaCursos=new Intent(AcHorarios.this, AcListaCursos.class);
+                        irListaCursos.putExtra("listaCursos",listaCursos);
+                        irListaCursos.putExtra("url_carpeta",urlCarpeta);
+                        irListaCursos.putExtra("extension",extension);
 
-                    Intent irListaCursos=new Intent(AcHorarios.this, AcListaCursos.class);
-                    irListaCursos.putExtra("listaCursos",listaCursos);
-                    irListaCursos.putExtra("url_carpeta",urlCarpeta);
-                    irListaCursos.putExtra("extension",extension);
-
-                    irListaCursos.putExtra("listaJsonModalidades",listaJsonModalidades.toString());
-                    startActivity(irListaCursos);
-
+                        irListaCursos.putExtra("listaJsonModalidades",listaJsonModalidades.toString());
+                        startActivity(irListaCursos);
+                    }
                 } catch (JSONException e) {
                     e.printStackTrace();
+                    m.mostrarMensaje();
                 }
             }
         });

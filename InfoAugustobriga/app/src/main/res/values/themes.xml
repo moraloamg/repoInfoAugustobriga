@@ -2,6 +2,7 @@
     <!-- Base application theme. (Day mode)-->
     <style name="Theme.InfoAugustobriga" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
+        <!-- Color de tipografía -->
         <item name="colorPrimary">@color/verde_dia</item>
         <item name="colorPrimaryVariant">@color/verde_dia</item>
         <item name="colorOnPrimary">@color/verde_dia</item>

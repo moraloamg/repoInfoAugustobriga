@@ -1,4 +1,4 @@
-package com.example.infoaugustobriga.adaptadoresListas;
+package com.example.infoaugustobriga.miscelanea;
 
 import android.content.Context;
 import android.content.res.Configuration;
@@ -9,7 +9,6 @@ import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.BaseAdapter;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.infoaugustobriga.Interfaces.IModosClaroOscuro;
