@@ -45,8 +45,6 @@ public class AcMenuPrincipal extends AppCompatActivity implements IConfigurarAct
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        //TODO OBTENER TAMBIEN LA CONFIGURACION DEL IDIOMA DEL MOVIL
-
         //obtenemos la configuracion del dispositivo para el modo dia-noche
         Configuration configuracion = Resources.getSystem().getConfiguration();
         //cargamos el layout que corresponde segun el modo de iluminacion del movil
