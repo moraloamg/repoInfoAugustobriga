@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">InfoAugustobriga</string>
+    <string name="nuestro_centro">Our High School</string>
+    <string name="noticias">News</string>
+    <string name="plano_del_centro">Map</string>
+    <string name="profesorado">Staff</string>
+    <string name="horarios">Schedules</string>
+    <string name="calendario">Calendars</string>
+    <string name="radio">Radio</string>
+    <string name="youtube">Youtube</string>
+    <string name="formacion_profesional">F.P</string>
+    <string name="bachillerato">baccalaureate</string>
+    <string name="educacion_secundaria">E.S.O</string>
+    <string name="tituloAplicacion">InfoAugustóbriga</string>
+    <string name="organizacion">Organization</string>
+</resources>
