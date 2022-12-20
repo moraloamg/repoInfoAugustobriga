@@ -27,7 +27,7 @@ import java.util.concurrent.ExecutionException;
 
 public class AcMenuPrincipal extends AppCompatActivity implements IConfigurarActividad {
 
-    //LinearLayout de los contenedores de iconos
+    //LinearLayout de los contenedores de los iconos
     LinearLayout lyCalendario, lyHorarios, lyMapa, lyNovedades, lyCentro, lyProfesorado, lyYoutube, lyRadio;
     //LinearLayout del titulo de la cabecera para animaciones
     LinearLayout lyTitulo;
