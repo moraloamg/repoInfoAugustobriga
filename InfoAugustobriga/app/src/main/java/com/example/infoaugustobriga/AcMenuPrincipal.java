@@ -54,7 +54,7 @@ public class AcMenuPrincipal extends AppCompatActivity implements IConfigurarAct
         cargarAnimaciones();
 
         //leemos el fichero raiz del cual obtendremos todos los enlaces
-        leerFicheroRaiz("https://raw.githubusercontent.com/moraloamg/pruebaAugustobriga/main/fichero_raiz.json");
+        leerFicheroRaiz("https://raw.githubusercontent.com/IESAugustobriga/datos_app/main/fichero_raiz.json");
 
         if(json==null){
             m.setTitulo("Error");
