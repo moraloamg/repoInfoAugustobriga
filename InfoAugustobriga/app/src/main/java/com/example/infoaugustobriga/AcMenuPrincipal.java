@@ -5,8 +5,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.content.res.Resources;
+import android.graphics.Point;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
+import android.view.Display;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -23,6 +26,8 @@ import com.example.infoaugustobriga.profesorado.AcProfesorado;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.concurrent.ExecutionException;
 
 public class AcMenuPrincipal extends AppCompatActivity implements IConfigurarActividad {
@@ -57,20 +62,17 @@ public class AcMenuPrincipal extends AppCompatActivity implements IConfigurarAct
         leerFicheroRaiz("https://raw.githubusercontent.com/IESAugustobriga/datos_app/main/fichero_raiz.json");
 
         if(json==null){
-            m.setTitulo("Error");
-            m.setContenido("Ha ocurrido un error al iniciar la aplicación");
-            m.setContexto(this);
-            m.mostrarMensaje();
+            m =  new Mensaje("Error","Ha ocurrido un error al iniciar la aplicación",this);
         }else{
             activarBotones();
         }
     }
 
     public void leerFicheroRaiz(String url){
-        LecturaJson fr= new LecturaJson(url);
+        LecturaJson lecturaJson= new LecturaJson(url);
         try {
             //convertimos el string a json
-            json = new JSONObject((String) fr.execute().get());
+            json = new JSONObject((String) lecturaJson.execute().get());
         } catch (ExecutionException e) {
             e.printStackTrace();
         } catch (InterruptedException e) {
@@ -84,11 +86,39 @@ public class AcMenuPrincipal extends AppCompatActivity implements IConfigurarAct
     public void cambiarDiaNoche(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
 
-        if (newConfig.uiMode == MODO_CLARO) {
-            setContentView(R.layout.activity_menu_principal_claro);
-        } else if (newConfig.uiMode == MODO_OSCURO){
-            setContentView(R.layout.activity_menu_principal_osc);
+        if(tamano_pantalla()>=5.0){
+            if (newConfig.uiMode == MODO_CLARO) {
+                setContentView(R.layout.activity_menu_principal_claro);
+            } else if (newConfig.uiMode == MODO_OSCURO){
+                setContentView(R.layout.activity_menu_principal_osc);
+            }
+        }else if (tamano_pantalla()<5.0){
+            if (newConfig.uiMode == MODO_CLARO) {
+                setContentView(R.layout.activity_menu_principal_claro_p);
+            } else if (newConfig.uiMode == MODO_OSCURO){
+                setContentView(R.layout.activity_menu_principal_osc_p);
+            }
         }
+
+
+    }
+
+    public double tamano_pantalla(){
+        DisplayMetrics metrics = getResources().getDisplayMetrics();
+        int densidadPPI = (int)(metrics.density * 160f);
+
+        Display display = getWindowManager().getDefaultDisplay();
+        Point tamano = new Point();
+        display.getSize(tamano);
+        int ancho = tamano.x;
+        int alto = tamano.y;
+
+        double diagonalPixels = Math.sqrt(Math.pow(ancho, 2) + Math.pow(alto, 2));
+        double pulgadasDiagonal = diagonalPixels / densidadPPI;
+
+        BigDecimal bd = new BigDecimal(pulgadasDiagonal);
+        pulgadasDiagonal = bd.setScale(2, RoundingMode.HALF_UP).doubleValue();
+        return pulgadasDiagonal;
     }
 
     @Override

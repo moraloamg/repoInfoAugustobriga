@@ -5,8 +5,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.content.res.Resources;
+import android.graphics.Point;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
+import android.view.Display;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -24,6 +27,8 @@ import com.example.infoaugustobriga.miscelanea.Mensaje;
 import org.json.JSONArray;
 import org.json.JSONException;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
 
@@ -65,7 +70,7 @@ public class AcHorarios extends AppCompatActivity implements IConfigurarActivida
         if(listaModalidades.size() == 0){
             m.mostrarMensaje();
         }else {
-            lViewModalidades.setAdapter(new AdaptadorListaGenerico(this, listaModalidades, null, configuracion));
+            lViewModalidades.setAdapter(new AdaptadorListaGenerico(this, listaModalidades, null, configuracion, tamano_pantalla()));
             activarBotones();
         }
 
@@ -115,11 +120,37 @@ public class AcHorarios extends AppCompatActivity implements IConfigurarActivida
     public void cambiarDiaNoche(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
 
-        if (newConfig.uiMode == MODO_CLARO) {
-            setContentView(R.layout.activity_general_claro);
-        } else if (newConfig.uiMode == MODO_OSCURO){
-            setContentView(R.layout.activity_general_osc);
+        if(tamano_pantalla()>=5.0){
+            if (newConfig.uiMode == MODO_CLARO) {
+                setContentView(R.layout.activity_general_claro);
+            } else if (newConfig.uiMode == MODO_OSCURO){
+                setContentView(R.layout.activity_general_osc);
+            }
+        }else if (tamano_pantalla()<5.0){
+            if (newConfig.uiMode == MODO_CLARO) {
+                setContentView(R.layout.activity_general_claro_p);
+            } else if (newConfig.uiMode == MODO_OSCURO){
+                setContentView(R.layout.activity_general_osc_p);
+            }
         }
+    }
+
+    public double tamano_pantalla(){
+        DisplayMetrics metrics = getResources().getDisplayMetrics();
+        int densidadPPI = (int)(metrics.density * 160f);
+
+        Display display = getWindowManager().getDefaultDisplay();
+        Point tamano = new Point();
+        display.getSize(tamano);
+        int ancho = tamano.x;
+        int alto = tamano.y;
+
+        double diagonalPixels = Math.sqrt(Math.pow(ancho, 2) + Math.pow(alto, 2));
+        double pulgadasDiagonal = diagonalPixels / densidadPPI;
+
+        BigDecimal bd = new BigDecimal(pulgadasDiagonal);
+        pulgadasDiagonal = bd.setScale(2, RoundingMode.HALF_UP).doubleValue();
+        return pulgadasDiagonal;
     }
 
     @Override

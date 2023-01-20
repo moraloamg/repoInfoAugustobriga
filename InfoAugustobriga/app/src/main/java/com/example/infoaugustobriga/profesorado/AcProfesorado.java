@@ -5,9 +5,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.content.res.Resources;
+import android.graphics.Point;
 import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
+import android.view.Display;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -26,6 +29,8 @@ import com.example.infoaugustobriga.miscelanea.Mensaje;
 import org.json.JSONArray;
 import org.json.JSONException;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.ArrayList;
 
 public class AcProfesorado extends AppCompatActivity implements IConfigurarActividad {
@@ -51,26 +56,22 @@ public class AcProfesorado extends AppCompatActivity implements IConfigurarActiv
 
         m =  new Mensaje("Error","Ha ocurrido un error al acceder a esta opción",this);
 
-        //TODO OBTENER TAMBIEN LA CONFIGURACION DEL IDIOMA DEL MOVIL
-
         //obtenemos la configuracion del dispositivo para el modo dia-noche
         Configuration configuracion = Resources.getSystem().getConfiguration();
         //cargamos el layout que corresponde segun el modo de iluminacion del movil
         cambiarDiaNoche(configuracion);
         recibirDatos();
         //identificamos lo elementos de la interfaz
-        identificarElementosInterfaz(configuracion);;
+        identificarElementosInterfaz(configuracion);
         cargarAnimaciones();
         //obtenemos la lista de modalidades del array Json que hemos pasado a esta actividad
         ArrayList<String> listaApartados = obtenerValorApartados();
         if(listaApartados.size()==0){
             m.mostrarMensaje();
         }else{
-            lViewApartados.setAdapter(new AdaptadorListaGenerico(this,listaApartados,null,configuracion));
+            lViewApartados.setAdapter(new AdaptadorListaGenerico(this,listaApartados,null,configuracion, tamano_pantalla()));
             activarBotones();
         }
-
-
     }
 
     private ArrayList<String> obtenerValorApartados() {
@@ -102,11 +103,37 @@ public class AcProfesorado extends AppCompatActivity implements IConfigurarActiv
     public void cambiarDiaNoche(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
 
-        if (newConfig.uiMode == MODO_CLARO) {
-            setContentView(R.layout.activity_general_claro);
-        } else if (newConfig.uiMode == MODO_OSCURO){
-            setContentView(R.layout.activity_general_osc);
+        if(tamano_pantalla()>=5.0){
+            if (newConfig.uiMode == MODO_CLARO) {
+                setContentView(R.layout.activity_general_claro);
+            } else if (newConfig.uiMode == MODO_OSCURO){
+                setContentView(R.layout.activity_general_osc);
+            }
+        }else if (tamano_pantalla()<5.0){
+            if (newConfig.uiMode == MODO_CLARO) {
+                setContentView(R.layout.activity_general_claro_p);
+            } else if (newConfig.uiMode == MODO_OSCURO){
+                setContentView(R.layout.activity_general_osc_p);
+            }
         }
+    }
+
+    public double tamano_pantalla(){
+        DisplayMetrics metrics = getResources().getDisplayMetrics();
+        int densidadPPI = (int)(metrics.density * 160f);
+
+        Display display = getWindowManager().getDefaultDisplay();
+        Point tamano = new Point();
+        display.getSize(tamano);
+        int ancho = tamano.x;
+        int alto = tamano.y;
+
+        double diagonalPixels = Math.sqrt(Math.pow(ancho, 2) + Math.pow(alto, 2));
+        double pulgadasDiagonal = diagonalPixels / densidadPPI;
+
+        BigDecimal bd = new BigDecimal(pulgadasDiagonal);
+        pulgadasDiagonal = bd.setScale(2, RoundingMode.HALF_UP).doubleValue();
+        return pulgadasDiagonal;
     }
 
     @Override
@@ -127,6 +154,8 @@ public class AcProfesorado extends AppCompatActivity implements IConfigurarActiv
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 try {
+                    //la variable "i" contiene la posicion del dato al cual se selecciona
+                    //dado que los datos estan ordenados, el nombre del apartado y su correspondiende enlace coinciden
                     String enlaceFichero= listaApartados.getJSONObject(i).getString("enlace");
 
                     Intent irApartado=new Intent(Intent.ACTION_VIEW, Uri.parse(enlaceFichero));

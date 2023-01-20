@@ -5,8 +5,29 @@
       <map>
         <entry key="..\:/Users/Usuario/AndroidStudioProjects/InfoAugustobriga/app/src/main/res/layout/activity_main.xml" value="0.20833333333333334" />
         <entry key="..\:/Users/Usuario/AndroidStudioProjects/repoInfoAugustobriga/InfoAugustobriga/app/src/main/res/drawable/ic_launcher_background.xml" value="0.31666666666666665" />
+        <entry key="..\:/Users/Usuario/AndroidStudioProjects/repoInfoAugustobriga/InfoAugustobriga/app/src/main/res/layout-large/activity_general_claro.xml" value="0.46924603174603174" />
+        <entry key="..\:/Users/Usuario/AndroidStudioProjects/repoInfoAugustobriga/InfoAugustobriga/app/src/main/res/layout-large/activity_general_osc.xml" value="0.46924603174603174" />
+        <entry key="..\:/Users/Usuario/AndroidStudioProjects/repoInfoAugustobriga/InfoAugustobriga/app/src/main/res/layout-large/activity_lista_generica_claro.xml" value="0.46924603174603174" />
+        <entry key="..\:/Users/Usuario/AndroidStudioProjects/repoInfoAugustobriga/InfoAugustobriga/app/src/main/res/layout-large/activity_lista_generica_osc.xml" value="0.46924603174603174" />
+        <entry key="..\:/Users/Usuario/AndroidStudioProjects/repoInfoAugustobriga/InfoAugustobriga/app/src/main/res/layout-large/activity_menu_principal_claro.xml" value="0.46924603174603174" />
+        <entry key="..\:/Users/Usuario/AndroidStudioProjects/repoInfoAugustobriga/InfoAugustobriga/app/src/main/res/layout-large/activity_menu_principal_osc.xml" value="0.2" />
+        <entry key="..\:/Users/Usuario/AndroidStudioProjects/repoInfoAugustobriga/InfoAugustobriga/app/src/main/res/layout-large/lista_generica_claro.xml" value="0.46924603174603174" />
+        <entry key="..\:/Users/Usuario/AndroidStudioProjects/repoInfoAugustobriga/InfoAugustobriga/app/src/main/res/layout-large/lista_generica_osc.xml" value="0.46924603174603174" />
+        <entry key="..\:/Users/Usuario/AndroidStudioProjects/repoInfoAugustobriga/InfoAugustobriga/app/src/main/res/layout-normal/activity_general_claro.xml" value="0.44000000000000006" />
+        <entry key="..\:/Users/Usuario/AndroidStudioProjects/repoInfoAugustobriga/InfoAugustobriga/app/src/main/res/layout-normal/activity_general_osc.xml" value="0.8" />
+        <entry key="..\:/Users/Usuario/AndroidStudioProjects/repoInfoAugustobriga/InfoAugustobriga/app/src/main/res/layout-normal/activity_lista_generica_claro.xml" value="0.4" />
+        <entry key="..\:/Users/Usuario/AndroidStudioProjects/repoInfoAugustobriga/InfoAugustobriga/app/src/main/res/layout-normal/activity_lista_generica_osc.xml" value="0.21422101449275363" />
+        <entry key="..\:/Users/Usuario/AndroidStudioProjects/repoInfoAugustobriga/InfoAugustobriga/app/src/main/res/layout-normal/activity_menu_principal_claro.xml" value="0.4" />
+        <entry key="..\:/Users/Usuario/AndroidStudioProjects/repoInfoAugustobriga/InfoAugustobriga/app/src/main/res/layout-normal/activity_menu_principal_osc.xml" value="0.132" />
+        <entry key="..\:/Users/Usuario/AndroidStudioProjects/repoInfoAugustobriga/InfoAugustobriga/app/src/main/res/layout-normal/lista_generica_claro.xml" value="0.6" />
+        <entry key="..\:/Users/Usuario/AndroidStudioProjects/repoInfoAugustobriga/InfoAugustobriga/app/src/main/res/layout-normal/lista_generica_osc.xml" value="0.3" />
+        <entry key="..\:/Users/Usuario/AndroidStudioProjects/repoInfoAugustobriga/InfoAugustobriga/app/src/main/res/layout-small/activity_menu_principal_claro.xml" value="0.21920289855072464" />
+        <entry key="..\:/Users/Usuario/AndroidStudioProjects/repoInfoAugustobriga/InfoAugustobriga/app/src/main/res/layout-sw320dp/activity_menu_principal_claro.xml" value="0.6" />
+        <entry key="..\:/Users/Usuario/AndroidStudioProjects/repoInfoAugustobriga/InfoAugustobriga/app/src/main/res/layout-sw480dp/activity_menu_principal_claro.xml" value="0.42063492063492064" />
         <entry key="..\:/Users/Usuario/AndroidStudioProjects/repoInfoAugustobriga/InfoAugustobriga/app/src/main/res/layout/activity_calendarios_claro.xml" value="0.24818840579710144" />
         <entry key="..\:/Users/Usuario/AndroidStudioProjects/repoInfoAugustobriga/InfoAugustobriga/app/src/main/res/layout/activity_calendarios_osc.xml" value="0.24818840579710144" />
+        <entry key="..\:/Users/Usuario/AndroidStudioProjects/repoInfoAugustobriga/InfoAugustobriga/app/src/main/res/layout/activity_general_claro.xml" value="0.21920289855072464" />
+        <entry key="..\:/Users/Usuario/AndroidStudioProjects/repoInfoAugustobriga/InfoAugustobriga/app/src/main/res/layout/activity_general_claro_p.xml" value="0.40773809523809523" />
         <entry key="..\:/Users/Usuario/AndroidStudioProjects/repoInfoAugustobriga/InfoAugustobriga/app/src/main/res/layout/activity_general_osc.xml" value="0.23007246376811594" />
         <entry key="..\:/Users/Usuario/AndroidStudioProjects/repoInfoAugustobriga/InfoAugustobriga/app/src/main/res/layout/activity_horarios.xml" value="0.23867753623188406" />
         <entry key="..\:/Users/Usuario/AndroidStudioProjects/repoInfoAugustobriga/InfoAugustobriga/app/src/main/res/layout/activity_horarios_claro.xml" value="0.2341485507246377" />
@@ -15,15 +36,19 @@
         <entry key="..\:/Users/Usuario/AndroidStudioProjects/repoInfoAugustobriga/InfoAugustobriga/app/src/main/res/layout/activity_lista_cursos_claro.xml" value="0.2296195652173913" />
         <entry key="..\:/Users/Usuario/AndroidStudioProjects/repoInfoAugustobriga/InfoAugustobriga/app/src/main/res/layout/activity_lista_cursos_osc.xml" value="0.2296195652173913" />
         <entry key="..\:/Users/Usuario/AndroidStudioProjects/repoInfoAugustobriga/InfoAugustobriga/app/src/main/res/layout/activity_lista_generica_claro.xml" value="0.23007246376811594" />
+        <entry key="..\:/Users/Usuario/AndroidStudioProjects/repoInfoAugustobriga/InfoAugustobriga/app/src/main/res/layout/activity_lista_generica_claro_p.xml" value="0.40773809523809523" />
         <entry key="..\:/Users/Usuario/AndroidStudioProjects/repoInfoAugustobriga/InfoAugustobriga/app/src/main/res/layout/activity_lista_generica_osc.xml" value="0.23007246376811594" />
         <entry key="..\:/Users/Usuario/AndroidStudioProjects/repoInfoAugustobriga/InfoAugustobriga/app/src/main/res/layout/activity_lista_osc.xml" value="0.2296195652173913" />
         <entry key="..\:/Users/Usuario/AndroidStudioProjects/repoInfoAugustobriga/InfoAugustobriga/app/src/main/res/layout/activity_menu_principal.xml" value="0.3" />
         <entry key="..\:/Users/Usuario/AndroidStudioProjects/repoInfoAugustobriga/InfoAugustobriga/app/src/main/res/layout/activity_menu_principal_claro.xml" value="0.2" />
-        <entry key="..\:/Users/Usuario/AndroidStudioProjects/repoInfoAugustobriga/InfoAugustobriga/app/src/main/res/layout/activity_menu_principal_osc.xml" value="0.268" />
+        <entry key="..\:/Users/Usuario/AndroidStudioProjects/repoInfoAugustobriga/InfoAugustobriga/app/src/main/res/layout/activity_menu_principal_claro_p.xml" value="0.268" />
+        <entry key="..\:/Users/Usuario/AndroidStudioProjects/repoInfoAugustobriga/InfoAugustobriga/app/src/main/res/layout/activity_menu_principal_osc.xml" value="0.132" />
+        <entry key="..\:/Users/Usuario/AndroidStudioProjects/repoInfoAugustobriga/InfoAugustobriga/app/src/main/res/layout/activity_menu_principal_osc_p.xml" value="0.40773809523809523" />
         <entry key="..\:/Users/Usuario/AndroidStudioProjects/repoInfoAugustobriga/InfoAugustobriga/app/src/main/res/layout/activity_profesorado_claro.xml" value="0.2246376811594203" />
         <entry key="..\:/Users/Usuario/AndroidStudioProjects/repoInfoAugustobriga/InfoAugustobriga/app/src/main/res/layout/activity_profesorado_osc.xml" value="0.2246376811594203" />
         <entry key="..\:/Users/Usuario/AndroidStudioProjects/repoInfoAugustobriga/InfoAugustobriga/app/src/main/res/layout/lista_generica.xml" value="0.2296195652173913" />
         <entry key="..\:/Users/Usuario/AndroidStudioProjects/repoInfoAugustobriga/InfoAugustobriga/app/src/main/res/layout/lista_generica_claro.xml" value="0.2477355072463768" />
+        <entry key="..\:/Users/Usuario/AndroidStudioProjects/repoInfoAugustobriga/InfoAugustobriga/app/src/main/res/layout/lista_generica_claro_p.xml" value="0.40773809523809523" />
         <entry key="..\:/Users/Usuario/AndroidStudioProjects/repoInfoAugustobriga/InfoAugustobriga/app/src/main/res/layout/lista_generica_osc.xml" value="0.2296195652173913" />
       </map>
     </option>

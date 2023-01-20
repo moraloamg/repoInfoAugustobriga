@@ -21,12 +21,14 @@ public class AdaptadorListaGenerico extends BaseAdapter implements IModosClaroOs
     Context contexto;
     Typeface fuente;
     Configuration config;
+    double pulgadas;
 
-    public AdaptadorListaGenerico(Context c,ArrayList<String> datos, Typeface fuenteContenedores, Configuration newConfig){
+    public AdaptadorListaGenerico(Context c,ArrayList<String> datos, Typeface fuenteContenedores, Configuration newConfig, double pulgadas){
         this.contexto=c;
         this.filas=new ArrayList<>();
         this.fuente = fuenteContenedores;
         this.config = newConfig;
+        this.pulgadas = pulgadas;
 
         //se utiliza un for y no un foreach debido a que este ultimo no coge los datos en orden
         for(int i=0;i<datos.size();i++){
@@ -57,15 +59,29 @@ public class AdaptadorListaGenerico extends BaseAdapter implements IModosClaroOs
         View list = null;
         TextView curso = null;
 
-        if(config.uiMode == MODO_CLARO){
-            list=inflar.inflate(R.layout.lista_generica_claro, viewGroup, false);
-            //disponemos las variables de los elementos gráficos
-            curso = (TextView) list.findViewById(R.id.txtListaClaro);
-        }else if(config.uiMode == MODO_OSCURO){
-            list=inflar.inflate(R.layout.lista_generica_osc, viewGroup, false);
-            //disponemos las variables de los elementos gráficos
-            curso = (TextView) list.findViewById(R.id.txtListaOsc);
+        if(pulgadas>=5.0){
+            if(config.uiMode == MODO_CLARO){
+                list=inflar.inflate(R.layout.lista_generica_claro, viewGroup, false);
+                //disponemos las variables de los elementos gráficos
+                curso = (TextView) list.findViewById(R.id.txtListaClaro);
+            }else if(config.uiMode == MODO_OSCURO){
+                list=inflar.inflate(R.layout.lista_generica_osc, viewGroup, false);
+                //disponemos las variables de los elementos gráficos
+                curso = (TextView) list.findViewById(R.id.txtListaOsc);
+            }
+        }else if (pulgadas<5.0){
+            if(config.uiMode == MODO_CLARO){
+                list=inflar.inflate(R.layout.lista_generica_claro_p, viewGroup, false);
+                //disponemos las variables de los elementos gráficos
+                curso = (TextView) list.findViewById(R.id.txtListaClaro);
+            }else if(config.uiMode == MODO_OSCURO){
+                list=inflar.inflate(R.layout.lista_generica_osc_p, viewGroup, false);
+                //disponemos las variables de los elementos gráficos
+                curso = (TextView) list.findViewById(R.id.txtListaOsc);
+            }
         }
+
+
 
         //rellenamos las variables con los datos de la lista
         curso.setText(filas.get(i).toString());
